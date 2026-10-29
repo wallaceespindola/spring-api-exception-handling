@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.wallaceespindola.exceptions.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -8,11 +8,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.example.demo.dto.OrderResponse;
-import com.example.demo.exception.ApiExceptionHandler;
-import com.example.demo.exception.OrderConflictException;
-import com.example.demo.exception.OrderNotFoundException;
-import com.example.demo.service.OrderService;
+import com.wallaceespindola.exceptions.dto.OrderResponse;
+import com.wallaceespindola.exceptions.exception.ApiExceptionHandler;
+import com.wallaceespindola.exceptions.exception.OrderConflictException;
+import com.wallaceespindola.exceptions.exception.OrderNotFoundException;
+import com.wallaceespindola.exceptions.service.OrderService;
 import java.math.BigDecimal;
 import java.time.Instant;
 import org.junit.jupiter.api.Test;

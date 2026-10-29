@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.wallaceespindola.exceptions.dto;
 
 import java.time.Instant;
 

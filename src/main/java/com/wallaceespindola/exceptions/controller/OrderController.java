@@ -1,9 +1,9 @@
-package com.example.demo.controller;
+package com.wallaceespindola.exceptions.controller;
 
-import com.example.demo.dto.CreateOrderRequest;
-import com.example.demo.dto.HealthResponse;
-import com.example.demo.dto.OrderResponse;
-import com.example.demo.service.OrderService;
+import com.wallaceespindola.exceptions.dto.CreateOrderRequest;
+import com.wallaceespindola.exceptions.dto.HealthResponse;
+import com.wallaceespindola.exceptions.dto.OrderResponse;
+import com.wallaceespindola.exceptions.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

@@ -1,6 +1,9 @@
 spring:
   application:
     name: spring-api-exception-handling
+  web:
+    # ponytail: English unless the client sends Accept-Language, so error text doesn't follow the server OS locale
+    locale: en
   mvc:
     problemdetails:
       enabled: true

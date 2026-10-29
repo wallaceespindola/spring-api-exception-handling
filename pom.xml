@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.wtech</groupId>
+    <groupId>com.wallaceespindola</groupId>
     <artifactId>spring-api-exception-handling</artifactId>
     <version>1.0.0</version>
     <name>Spring API Exception Handling</name>

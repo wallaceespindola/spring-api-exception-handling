@@ -1,12 +1,12 @@
-package com.example.demo.service;
+package com.wallaceespindola.exceptions.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.example.demo.dto.CreateOrderRequest;
-import com.example.demo.dto.OrderResponse;
-import com.example.demo.exception.OrderConflictException;
-import com.example.demo.exception.OrderNotFoundException;
+import com.wallaceespindola.exceptions.dto.CreateOrderRequest;
+import com.wallaceespindola.exceptions.dto.OrderResponse;
+import com.wallaceespindola.exceptions.exception.OrderConflictException;
+import com.wallaceespindola.exceptions.exception.OrderNotFoundException;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 

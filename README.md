@@ -80,7 +80,7 @@ curl -i -X POST localhost:8080/api/orders -H 'Content-Type: application/json' \
 }
 ```
 
-The message text follows the server locale.
+Messages are in English by default. Send `Accept-Language` (for example `pt-BR`) to get them translated.
 
 ### 409 Conflict
 
@@ -124,7 +124,7 @@ The exception message thrown in the controller is only written to the log.
 ## Project layout
 
 ```text
-src/main/java/com/example/demo/
+src/main/java/com/wallaceespindola/exceptions/
   controller/   OrderController
   dto/          records: CreateOrderRequest, OrderResponse, HealthResponse
   exception/    ApiException, its two subclasses, ApiExceptionHandler
