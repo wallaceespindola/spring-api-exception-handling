@@ -2,7 +2,7 @@
 
 ![Fail gracefully](docs/images/banner.png)
 
-[![Apache 2.0 License](https://img.shields.io/badge/License-Apache_2.0-blue)](LICENSE) [![Java 25](https://img.shields.io/badge/Java-25-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/projects/jdk/25/) [![Spring Boot 3.5](https://img.shields.io/badge/Spring_Boot-3.5-6db33f?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot) [![CI](https://github.com/wallaceespindola/spring-api-exception-handling/actions/workflows/ci.yml/badge.svg)](https://github.com/wallaceespindola/spring-api-exception-handling/actions/workflows/ci.yml)
+[![Apache 2.0 License](https://img.shields.io/badge/License-Apache_2.0-blue)](LICENSE) [![Java 25](https://img.shields.io/badge/Java-25-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/projects/jdk/25/) [![Spring Boot 4.1](https://img.shields.io/badge/Spring_Boot-4.1-6db33f?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot) [![CI](https://github.com/wallaceespindola/spring-api-exception-handling/actions/workflows/ci.yml/badge.svg)](https://github.com/wallaceespindola/spring-api-exception-handling/actions/workflows/ci.yml)
 
 The idea: a REST API should fail in one predictable shape. Clients should not have to guess whether an error is a bare string, a custom JSON object or an HTML page. This project is a small Spring Boot demo that sends every error, whether it comes from your code or from Spring itself, as an [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) `application/problem+json` document with a `timestamp`.
 
@@ -40,6 +40,8 @@ Other targets: `make test` (tests plus the JaCoCo 80% line coverage gate), `make
 | `GET` | `/api/failure` | Always 500 |
 | `GET` | `/health` | 200 with `status` and `timestamp` (Actuator health is at `/actuator/health`) |
 
+Spring Boot 4 serializes with Jackson 3, which omits `"type"` when it is the default `about:blank`. Clients should treat a missing `type` as `about:blank`, as RFC 9457 says.
+
 ### 404 Not Found
 
 ```bash
@@ -48,7 +50,6 @@ curl -i localhost:8080/api/orders/42
 
 ```json
 {
-  "type": "about:blank",
   "title": "Not Found",
   "status": 404,
   "detail": "Order 42 not found",
@@ -67,7 +68,6 @@ curl -i -X POST localhost:8080/api/orders -H 'Content-Type: application/json' \
 
 ```json
 {
-  "type": "about:blank",
   "title": "Bad Request",
   "status": 400,
   "detail": "Validation failed",
@@ -92,7 +92,6 @@ curl -i -X POST localhost:8080/api/orders/1/pay
 
 ```json
 {
-  "type": "about:blank",
   "title": "Conflict",
   "status": 409,
   "detail": "Order 1 is already paid",
@@ -110,7 +109,6 @@ curl -i localhost:8080/api/failure
 
 ```json
 {
-  "type": "about:blank",
   "title": "Internal Server Error",
   "status": 500,
   "detail": "An unexpected error occurred",

@@ -11,6 +11,12 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    ignore:
+      # ponytail: majors here are JDK/Node releases; move LTS-to-LTS by hand
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+      # builder tag encodes the JDK in a suffix (temurin-25 -> 26), which the rule above misses
+      - dependency-name: "maven"
     groups:
       all:
         patterns: ["*"]
