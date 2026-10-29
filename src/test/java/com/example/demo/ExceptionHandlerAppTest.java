@@ -1,40 +1,29 @@
 package com.example.demo;
 
-import com.example.demo.service.ExampleService;
-import com.example.demo.service.ExternalService;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
-
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ExceptionHandlerAppTest {
 
     @Autowired
-    private ExampleService exampleService;
-
-    // Mock any external service that you don't want to actually invoke
-    @MockBean
-    private ExternalService externalService;
+    private TestRestTemplate rest;
 
     @Test
-    void contextLoads() {
-        assertThat(exampleService).isNotNull();
+    void getOrder_missing_returnsProblemJsonEndToEnd() {
+        var response = rest.getForEntity("/api/orders/999", String.class);
+
+        assertThat(response.getStatusCode().value()).isEqualTo(404);
+        assertThat(response.getHeaders().getContentType().toString()).startsWith("application/problem+json");
+        assertThat(response.getBody()).contains("ORDER_NOT_FOUND", "timestamp");
     }
 
     @Test
-    void serviceBehaviorTest() {
-        // given
-        when(externalService.getDescription()).thenReturn("mocked response");
-
-        // when
-        String result = exampleService.getExternalServiceDescription();
-
-        // then
-        assertThat(result).isEqualTo("mocked response");
-        verify(externalService, times(1)).getDescription();
+    void actuatorHealth_isUp() {
+        assertThat(rest.getForObject("/actuator/health", String.class)).contains("UP");
     }
 }

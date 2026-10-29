@@ -1,20 +1,18 @@
 package com.example.demo.exception;
 
-public class ApiException extends RuntimeException {
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
-    private final int code;
+/** Base class for domain errors: carries the HTTP status and a stable machine-readable code. */
+@Getter
+public abstract class ApiException extends RuntimeException {
 
-    public ApiException(ExceptionBase e) {
-        super(e.getMsg());
-        this.code = e.getCode();
-    }
+    private final HttpStatus status;
+    private final String code;
 
-    public ApiException(String message) {
+    protected ApiException(HttpStatus status, String code, String message) {
         super(message);
-        this.code = 0;
-    }
-
-    public int getCode() {
-        return code;
+        this.status = status;
+        this.code = code;
     }
 }

@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: spring-api-exception-handling
+  mvc:
+    problemdetails:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  info:
+    java:
+      enabled: true
+
+info:
+  app:
+    name: "@project.name@"
+    version: "@project.version@"
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
